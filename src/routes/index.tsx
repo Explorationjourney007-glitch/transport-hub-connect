@@ -75,16 +75,18 @@ function SectionHeader({ label, title, copy, centered = false }: { label: string
   return <div className={centered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}><p className="section-label">{label}</p><h2 className="section-title">{title}</h2>{copy && <p className="section-copy">{copy}</p>}</div>;
 }
 
-function ScreenshotFrame({ label, alt, children, hero = false }: { label: string; alt: string; children?: ReactNode; hero?: boolean }) {
+const dashboardScreenshot = "/__l5e/assets-v1/8c6bd588-8023-4dda-bb09-84510470f873/logitrack-dashboard.png";
+
+function ScreenshotFrame({ label, alt, children, hero = false, src }: { label: string; alt: string; children?: ReactNode; hero?: boolean; src?: string }) {
   return <figure className={`product-frame ${hero ? "product-frame-hero" : ""}`} aria-label={alt}>
     <div className="browser-bar"><span /><span /><span /><div className="browser-address">app.logitrack.in</div></div>
-    <div className="product-placeholder">
+    {src ? <img src={src} alt={alt} className="block w-full" loading={hero ? "eager" : "lazy"} decoding="async" /> : <div className="product-placeholder">
       <div className="placeholder-mark"><FileSpreadsheet /></div>
       <p className="font-semibold text-foreground">{label}</p>
       <p className="mt-1 text-sm text-muted-foreground">Product screenshot placeholder</p>
       <p className="mt-3 max-w-sm text-xs text-muted-foreground">Replace with the supplied LogiTrack screenshot. No interface has been fabricated.</p>
       {children}
-    </div>
+    </div>}
   </figure>;
 }
 
@@ -109,7 +111,7 @@ function ProductSection({ id, label, title, copy, imageLabel, alt, reverse, chil
 
 function LogiTrackPage() {
   return <div id="top" className="min-h-screen bg-background text-foreground"><Nav /><main>
-    <section id="product" className="relative overflow-hidden border-b border-border pt-18"><div className="hero-grid" /><div className="site-container grid min-h-[820px] items-center gap-14 py-20 lg:grid-cols-[.84fr_1.16fr] lg:py-24"><div className="relative z-10"><p className="section-label">Transport business management software</p><h1 className="max-w-2xl font-display text-5xl font-bold leading-[1.04] tracking-normal sm:text-6xl xl:text-7xl">Your Trucks.<br />Your Trips.<br /><span className="text-primary">Your Money.</span><br />One Place.</h1><p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">Run your transport business without chasing information across WhatsApp, Excel and phone calls. Manage bookings, trips, expenses and customer payments in one simple system.</p><div className="mt-8 flex flex-wrap items-center gap-3"><StartButton /><DemoButton /></div><p className="mt-3 text-sm text-muted-foreground">1-week free trial · No commitment</p><div className="mt-10 border-t border-border pt-5"><p className="text-sm font-medium">Built around the way transport businesses work</p><p className="mt-2 text-sm text-muted-foreground">Trips · Expenses · Payments · Vehicles · Drivers</p></div></div><div className="relative"><ScreenshotFrame hero label="LogiTrack Dashboard" alt="Placeholder for the actual LogiTrack business dashboard screenshot"><div className="demo-insight"><span>Illustrative example</span><strong>Trip Profit</strong><b>₹43,000</b></div></ScreenshotFrame></div></div></section>
+    <section id="product" className="relative overflow-hidden border-b border-border pt-18"><div className="hero-grid" /><div className="site-container grid min-h-[820px] items-center gap-14 py-20 lg:grid-cols-[.84fr_1.16fr] lg:py-24"><div className="relative z-10"><p className="section-label">Transport business management software</p><h1 className="max-w-2xl font-display text-5xl font-bold leading-[1.04] tracking-normal sm:text-6xl xl:text-7xl">Your Trucks.<br />Your Trips.<br /><span className="text-primary">Your Money.</span><br />One Place.</h1><p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">Run your transport business without chasing information across WhatsApp, Excel and phone calls. Manage bookings, trips, expenses and customer payments in one simple system.</p><div className="mt-8 flex flex-wrap items-center gap-3"><StartButton /><DemoButton /></div><p className="mt-3 text-sm text-muted-foreground">1-week free trial · No commitment</p><div className="mt-10 border-t border-border pt-5"><p className="text-sm font-medium">Built around the way transport businesses work</p><p className="mt-2 text-sm text-muted-foreground">Trips · Expenses · Payments · Vehicles · Drivers</p></div></div><div className="relative"><ScreenshotFrame hero src={dashboardScreenshot} label="LogiTrack Dashboard" alt="LogiTrack dashboard showing total trips, net profit, total expenses and active trips with revenue versus expenses charts" /></div></div></section>
 
     <section className="section-pad bg-muted/50"><div className="site-container"><SectionHeader centered label="Sound familiar?" title="Your business is moving. But your information is everywhere." copy="Bookings come through WhatsApp. Drivers are coordinated over phone calls. Trip expenses end up in Excel. Bills are handled separately. And customer payments need constant follow-up." /><div className="scatter-grid mt-14">{([{ icon: MessageCircle, name: "WhatsApp" },{ icon: Phone, name: "Phone calls" },{ icon: FileSpreadsheet, name: "Excel" },{ icon: BookOpenCheck, name: "Tally" },{ icon: WalletCards, name: "Payment records" }]).map(({ icon: Icon, name },i) => <div key={name} className={`scatter-card scatter-${i}`}><Icon className="size-5 text-primary" /><span>{name}</span></div>)}<div className="scatter-core"><span>The result?</span><strong>Too many places.<br />No single view.</strong></div></div><p className="mx-auto mt-12 max-w-2xl text-center text-lg leading-8 text-muted-foreground">These tools are useful individually. But your transport business needs the information connected — without you having to connect it all yourself.</p></div></section>
 
